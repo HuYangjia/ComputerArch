@@ -1,14 +1,3 @@
- [    LINK]  -> X86/gem5.opt
-scons: done building targets.
-*** Summary of Warnings ***
-Warning: While checking protoc version: [Errno 2] No such file or directory: 'protoc'
-Warning: Protocol buffer compiler (protoc) not found.
-         Please install protobuf-compiler for tracing support.
-Warning: Header file <png.h> not found.
-         This host has no libpng library.
-         Disabling support for PNG framebuffers.
-Warning: Couldn't find HDF5 C++ libraries. Disabling HDF5 support.
-
 # Lab1 实验报告
 
 **PB22111665 胡揚嘉**
