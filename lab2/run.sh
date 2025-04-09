@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # 进入根目录，所有操作都在这里进行
-cd /home/huyangjia/Coding/CS_Arch/comparch25spring-gem5
+cd /home/yangjia/Coding/comparch25spring-gem5
 
 # 确定路径相关参数
-FILE_PATH="/home/huyangjia/Coding/CS_Arch/comparch25spring-gem5/lab2/lab2-benchmark"
-OUTPUT_DIR="/home/huyangjia/Coding/CS_Arch/comparch25spring-gem5/lab2/output"
+FILE_PATH="/home/yangjia/Coding/comparch25spring-gem5/lab2/lab2-benchmark"
+OUTPUT_DIR="/home/yangjia/Coding/comparch25spring-gem5/lab2/output"
 
 
 # 创建输出目录以及5个子目录
