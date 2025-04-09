@@ -21,3 +21,9 @@ chmod +x ./run.sh
 解决了334的错误，还有318的
 
 `build/X86/sim/syscall_desc.hh:209: fatal: Syscall 318 out of range`
+
+Ifsr.c: 测试的是内存访问性能，特别是随机访问模式下的内存带宽和延迟
+merge.c: 归并排序（Merge Sort）算法的性能。
+mm.c: 矩阵乘法基准测试
+sieve.c: 找出小于或等于给定数 n 的所有素数。
+spmv.c: 测试稀疏矩阵-向量乘法（Sparse Matrix-Vector Multiplication，简称SPMV）的性能。
