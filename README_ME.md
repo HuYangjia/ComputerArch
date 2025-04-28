@@ -33,3 +33,13 @@ CompArch-H
    > 3. **同步上游仓库的代码**：
    >    - `git fetch upstream`
    >    - `git merge upstream/master`
+
+
+
+## 往年参考
+
+> 感谢前辈的贡献
+
+https://github.com/0auv0/CompArch-H-/
+
+https://github.com/xjh389336645/calab-gem5/

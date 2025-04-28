@@ -2,3 +2,4 @@ lab1/gem5-stable
 gem5-stable
 */m5out
 **/*.pyc
+lab3/cache_trace.txt
