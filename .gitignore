@@ -3,3 +3,5 @@ gem5-stable
 */m5out
 **/*.pyc
 lab3/cache_trace.txt
+lab4/gcc-linaro-6.4.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz
+lab4/gcc-linaro-6.4.1-2017.11-x86_64_aarch64-linux-gnu
