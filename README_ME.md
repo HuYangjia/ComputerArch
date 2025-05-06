@@ -21,7 +21,7 @@ CompArch-H
    origin  https://git.ustc.edu.cn/YiranXu/comparch25spring-gem5.git (fetch)
    origin  https://git.ustc.edu.cn/YiranXu/comparch25spring-gem5.git (push)
    ```
-   
+
    > 通常，origin是默认的远程仓库名称，指的是克隆的原始仓库。
    >
    > 可以如下解决问题：
@@ -33,6 +33,17 @@ CompArch-H
    > 3. **同步上游仓库的代码**：
    >    - `git fetch upstream`
    >    - `git merge upstream/master`
+
+4. 如何在两个仓库之间搬运文件呢？
+
+   在`origin main `中pull助教的文档
+
+   切回`yangjia`目录，
+
+   > git checkout main -- lab4
+   > git checkout main -- README.md
+
+   诺:smile:，到了`Yangjia`目录了。
 
 
 
