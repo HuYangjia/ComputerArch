@@ -1,7 +1,20 @@
 #include <cstdio>
 #include <random>
+void get_diff(double *Y, double *Y_unroll, char *name)
+{
+    printf("%s:", name);
+    for (int i = 0; i < 10000; i++)
+    {
+        if (Y[i] != Y_unroll[i])
+        {
+            printf("in num %d, Y = %d, Y_unroll = %d\n", i, Y[i], Y_unroll[i]);
+            return;
+        }
+    }
+    printf("all equal\n");
+}
 
-#include <gem5/m5ops.h>
+
 
 void daxpy(double *X, double *Y, double alpha, const int N)
 {
@@ -250,6 +263,7 @@ void daxsbxpxy_unroll_16(double *X, double *Y, double alpha, double beta, const 
     }
 }
 
+
 void stencil_unroll_4(double *Y, double alpha, const int N)
 {
     // 从1开始到N-2结束，总共N-2个元素
@@ -372,7 +386,8 @@ void stencil_unroll_16(double *Y, double alpha, const int N)
 int main()
 {
     const int N = 10000;
-    double *X = new double[N], *Y = new double[N], alpha = 0.5, beta = 0.1;
+    double *X = new double[N], alpha = 0.5, beta = 0.1;
+    double *Y = new double[N], *Y_unroll_4 = new double[N], *Y_unroll_6 = new double[N], *Y_unroll_8 = new double[N], *Y_unroll_12 = new double[N], *Y_unroll_16 = new double[N];
 
     //std::random_device rd;
     std::mt19937 gen(0);
@@ -381,55 +396,51 @@ int main()
     {
         X[i] = dis(gen);
         Y[i] = dis(gen);
+        Y_unroll_4[i] = Y[i];
+        Y_unroll_6[i] = Y[i];
+        Y_unroll_8[i] = Y[i];
+        Y_unroll_12[i] = Y[i];
+        Y_unroll_16[i] = Y[i];
     }
 
-    m5_dump_reset_stats(0, 0);
     daxpy(X, Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    daxpy_unroll_4(X, Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    daxpy_unroll_6(X, Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    daxpy_unroll_8(X, Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    daxpy_unroll_12(X, Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    daxpy_unroll_16(X, Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
+    daxpy_unroll_4(X, Y_unroll_4, alpha, N);
+    daxpy_unroll_6(X, Y_unroll_6, alpha, N);
+    daxpy_unroll_8(X, Y_unroll_8, alpha, N);
+    daxpy_unroll_12(X, Y_unroll_12, alpha, N);
+    daxpy_unroll_16(X, Y_unroll_16, alpha, N);
+    get_diff(Y, Y_unroll_4, "daxpy_unroll_4");
+    get_diff(Y, Y_unroll_6, "daxpy_unroll_6");
+    get_diff(Y, Y_unroll_8, "daxpy_unroll_8");
+    get_diff(Y, Y_unroll_12, "daxpy_unroll_12");
+    get_diff(Y, Y_unroll_16, "daxpy_unroll_16");
+
 
 
     daxsbxpxy(X, Y, alpha, beta, N);
-    m5_dump_reset_stats(0, 0);
-    daxsbxpxy_unroll_4(X, Y, alpha, beta, N);
-    m5_dump_reset_stats(0, 0);
-    daxsbxpxy_unroll_6(X, Y, alpha, beta, N);
-    m5_dump_reset_stats(0, 0);
-    daxsbxpxy_unroll_8(X, Y, alpha, beta, N);
-    m5_dump_reset_stats(0, 0);
-    daxsbxpxy_unroll_12(X, Y, alpha, beta, N);
-    m5_dump_reset_stats(0, 0);
-    daxsbxpxy_unroll_16(X, Y, alpha, beta, N);
-    m5_dump_reset_stats(0, 0);
+    daxsbxpxy_unroll_4(X, Y_unroll_4, alpha, beta, N);
+    daxsbxpxy_unroll_6(X, Y_unroll_6, alpha, beta, N);
+    daxsbxpxy_unroll_8(X, Y_unroll_8, alpha, beta, N);
+    daxsbxpxy_unroll_12(X, Y_unroll_12, alpha, beta, N);
+    daxsbxpxy_unroll_16(X, Y_unroll_16, alpha, beta, N);
+    get_diff(Y, Y_unroll_4, "daxsbxpxy_unroll_4");
+    get_diff(Y, Y_unroll_6, "daxsbxpxy_unroll_6");
+    get_diff(Y, Y_unroll_8, "daxsbxpxy_unroll_8");
+    get_diff(Y, Y_unroll_12, "daxsbxpxy_unroll_12");
+    get_diff(Y, Y_unroll_16, "daxsbxpxy_unroll_16");
     
     
     stencil(Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    stencil_unroll_4(Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    stencil_unroll_6(Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    stencil_unroll_8(Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    stencil_unroll_12(Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
-    stencil_unroll_16(Y, alpha, N);
-    m5_dump_reset_stats(0, 0);
+    stencil_unroll_4(Y_unroll_4, alpha, N);
+    stencil_unroll_6(Y_unroll_6, alpha, N);
+    stencil_unroll_8(Y_unroll_8, alpha, N);
+    stencil_unroll_12(Y_unroll_12, alpha, N);
+    stencil_unroll_16(Y_unroll_16, alpha, N);
+    get_diff(Y, Y_unroll_4, "stencil_unroll_4");
+    get_diff(Y, Y_unroll_6, "stencil_unroll_6");
+    get_diff(Y, Y_unroll_8, "stencil_unroll_8");
+    get_diff(Y, Y_unroll_12, "stencil_unroll_12");
+    get_diff(Y, Y_unroll_16, "stencil_unroll_16");
 
-    double sum = 0;
-    for (int i = 0; i < N; ++i)
-    {
-        sum += Y[i];
-    }
-    printf("%lf\n", sum);
     return 0;
 }
