@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "string": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp",
+        "chrono": "cpp",
+        "variant": "cpp",
+        "valarray": "cpp"
+    }
+}
